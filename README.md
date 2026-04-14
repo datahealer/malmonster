@@ -74,15 +74,32 @@ bash scan.sh --kill --code-dir /path/to/your/projects
 
 ### Windows (PowerShell)
 
+**If you're running from PowerShell (already inside a `PS>` prompt):**
+
 ```powershell
 # Scan only
-powershell -ExecutionPolicy Bypass -File scan.ps1
+Set-ExecutionPolicy -Scope Process Bypass; .\scan.ps1
 
 # Override project root
+Set-ExecutionPolicy -Scope Process Bypass; .\scan.ps1 -CodeDir C:\path\to\projects
+```
+
+**If you're running from Command Prompt (`cmd.exe`) or Windows Terminal:**
+
+```cmd
+powershell -ExecutionPolicy Bypass -File scan.ps1
 powershell -ExecutionPolicy Bypass -File scan.ps1 -CodeDir C:\path\to\projects
 ```
 
-> The Windows script is scan-only. Process killing on Windows: open Task Manager, find `node.exe` processes, and end them — or run `taskkill /PID <pid> /F` in an admin command prompt.
+**If you have PowerShell 7+ (`pwsh`):**
+
+```powershell
+pwsh -ExecutionPolicy Bypass -File scan.ps1
+```
+
+> **Tip:** Right-click the Start menu → "Windows PowerShell" or "Terminal" to open a prompt, then `cd` to the folder containing `scan.ps1` before running.
+
+> The Windows script is scan-only. To kill malicious processes: use Task Manager (find `node.exe` → End Task), or run `taskkill /PID <pid> /F` in an admin command prompt with the PID shown in the scan output.
 
 ---
 
